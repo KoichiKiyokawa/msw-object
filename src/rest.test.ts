@@ -43,9 +43,9 @@ describe("rest handler test", () => {
       path: "/users",
       method: "post",
       statusCode: 201,
-      onRequest: (req) => {
+      onRequest: async (req) => {
         requestUrlSpy(req.url.toString());
-        requestBodySpy(req.body);
+        requestBodySpy(await req.json());
         requestMethodSpy(req.method);
       },
       resolver: () => {
