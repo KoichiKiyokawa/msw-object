@@ -3,6 +3,9 @@ import { afterAll, afterEach, beforeAll, describe, expect, test, vi } from "vite
 import { createRestHandler } from "./rest";
 import axios from "axios";
 
+// We use axios because msw does not support mocking fetch in Node 18.
+// https://t-yng.jp/post/msw-node18-error
+
 describe("rest handler test", () => {
   const server = setupServer();
   beforeAll(() => server.listen({ onUnhandledRequest: "warn" }));
