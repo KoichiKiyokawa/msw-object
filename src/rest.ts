@@ -24,7 +24,7 @@ export type RestBuilder<
   onRequest?: ResponseResolver<RestRequest<RequestBody>, RestContext>;
 };
 
-export const defineBaseBuilder = <
+export const defineBaseRestBuilder = <
   // rome-ignore lint/suspicious/noExplicitAny: <explanation>
   ResponseData = any,
   RequestBody extends DefaultBodyType = DefaultBodyType,

@@ -1,6 +1,6 @@
 import { setupServer } from "msw/node";
 import { afterAll, afterEach, beforeAll, describe, expect, test, vi } from "vitest";
-import { createRestHandler, defineBaseBuilder } from "./rest";
+import { createRestHandler, defineBaseRestBuilder } from "./rest";
 import axios from "axios";
 
 // We use axios because msw does not support mocking fetch in Node 18.
@@ -12,7 +12,7 @@ describe("rest handler test", () => {
   afterEach(() => server.resetHandlers());
   afterAll(() => server.close());
 
-  const baseUserBuilder = defineBaseBuilder({
+  const baseUserBuilder = defineBaseRestBuilder({
     basePath: "https://example.com/api",
     path: "/users",
     statusCode: 200,
