@@ -10,7 +10,7 @@ import { joinURL } from "ufo";
 
 type MaybePromise<T> = Promise<T> | T;
 
-type RestBuilder<
+export type RestBuilder<
   // rome-ignore lint/suspicious/noExplicitAny: <explanation>
   ResponseData = any,
   RequestBody extends DefaultBodyType = DefaultBodyType,
@@ -38,14 +38,6 @@ export const defineBaseBuilder = <
   resolver: () => {},
   ...builder,
 });
-
-export const defineBuilder = <
-  // rome-ignore lint/suspicious/noExplicitAny: <explanation>
-  ResponseData = any,
-  RequestBody extends DefaultBodyType = DefaultBodyType,
->(
-  builder: RestBuilder<ResponseData, RequestBody>,
-) => builder;
 
 export function createRestHandler<ResponseData, RequestBody extends DefaultBodyType>(
   builder: RestBuilder<ResponseData, RequestBody>,
