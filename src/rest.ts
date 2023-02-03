@@ -10,7 +10,11 @@ import { joinURL } from "ufo";
 
 type MaybePromise<T> = Promise<T> | T;
 
-export type RestBuilder<ResponseData, RequestBody extends DefaultBodyType> = {
+type RestBuilder<
+  // rome-ignore lint/suspicious/noExplicitAny: <explanation>
+  ResponseData = any,
+  RequestBody extends DefaultBodyType = DefaultBodyType,
+> = {
   basePath: string;
   path: string;
   method: "get" | "post" | "put" | "patch" | "delete";
@@ -19,6 +23,29 @@ export type RestBuilder<ResponseData, RequestBody extends DefaultBodyType> = {
   resolver(req: RestRequest<RequestBody>): MaybePromise<ResponseData>;
   onRequest?: ResponseResolver<RestRequest<RequestBody>, RestContext>;
 };
+
+export const defineBaseBuilder = <
+  // rome-ignore lint/suspicious/noExplicitAny: <explanation>
+  ResponseData = any,
+  RequestBody extends DefaultBodyType = DefaultBodyType,
+>(
+  builder: Partial<RestBuilder>,
+): RestBuilder<ResponseData, RequestBody> => ({
+  basePath: "",
+  path: "",
+  method: "get",
+  statusCode: 200,
+  resolver: () => {},
+  ...builder,
+});
+
+export const defineBuilder = <
+  // rome-ignore lint/suspicious/noExplicitAny: <explanation>
+  ResponseData = any,
+  RequestBody extends DefaultBodyType = DefaultBodyType,
+>(
+  builder: RestBuilder<ResponseData, RequestBody>,
+) => builder;
 
 export function createRestHandler<ResponseData, RequestBody extends DefaultBodyType>(
   builder: RestBuilder<ResponseData, RequestBody>,

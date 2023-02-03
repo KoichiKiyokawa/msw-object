@@ -1,6 +1,6 @@
 import { setupServer } from "msw/node";
 import { afterAll, afterEach, beforeAll, describe, expect, test, vi } from "vitest";
-import { createRestHandler } from "./rest";
+import { createRestHandler, defineBaseBuilder } from "./rest";
 import axios from "axios";
 
 // We use axios because msw does not support mocking fetch in Node 18.
@@ -12,20 +12,22 @@ describe("rest handler test", () => {
   afterEach(() => server.resetHandlers());
   afterAll(() => server.close());
 
+  const baseUserBuilder = defineBaseBuilder({
+    basePath: "https://example.com/api",
+    path: "/users",
+    statusCode: 200,
+    resolver: () => ({ id: 1, name: "John" }),
+  });
+
   test("define get handler", async () => {
     const requestUrlSpy = vi.fn();
     const requestMethodSpy = vi.fn();
     const handler = createRestHandler({
-      basePath: "https://example.com/api",
-      path: "/users",
+      ...baseUserBuilder,
       method: "get",
-      statusCode: 200,
       onRequest: (req) => {
         requestUrlSpy(req.url.toString());
         requestMethodSpy(req.method);
-      },
-      resolver: () => {
-        return { id: 1, name: "John" };
       },
     });
     server.use(handler);
@@ -42,17 +44,13 @@ describe("rest handler test", () => {
     const requestBodySpy = vi.fn();
     const requestMethodSpy = vi.fn();
     const handler = createRestHandler({
-      basePath: "https://example.com/api",
-      path: "/users",
+      ...baseUserBuilder,
       method: "post",
       statusCode: 201,
       onRequest: async (req) => {
         requestUrlSpy(req.url.toString());
         requestBodySpy(await req.json());
         requestMethodSpy(req.method);
-      },
-      resolver: () => {
-        return { id: 1, name: "John" };
       },
     });
     server.use(handler);
