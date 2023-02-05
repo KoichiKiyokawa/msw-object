@@ -24,23 +24,26 @@ npm i -D @kiyoshiro/msw-object
 import {
   defineBaseRestBuilder,
   createRestHandler,
+  RestBuilder,
 } from "@kiyoshiro/msw-object";
 import { setupServer } from "msw";
 
 const baseBuilder = defineBaseRestBuilder({
   basePath: "http://localhost:3000",
-  delay: 500, // set default delay as 500ms
+  // Set default delay as 500ms
+  // It cannot be done with original msw!!
+  delay: 500,
 });
 
 // extends baseBuilder
-const userShowBuilder = {
+const userShowBuilder: RestBuilder = {
   ...baseBuilder,
   path: "/users/:id",
   resolve: () => ({ id: 1, name: "user1", age: 10 }),
 };
 
 // extends userShowBuilder
-const userListBuilder = {
+const userListBuilder: RestBuilder = {
   ...userShowBuilder,
   path: "/users",
   resolve: () => [userShowBuilder.resolve()],
@@ -92,6 +95,49 @@ setupServer(userShowHandler, userListHandler);
 
 TODO...
 
-## Abstract
+## Recipes
+
+### Switch the response by request query
+
+```ts
+const userListBuilder: RestBuilder = {
+  ...baseBuilder,
+  resolver: (req) => {
+    switch (req.url.searchParams.get("category")) {
+      case "follower":
+        return [
+          /* follower user list */
+        ];
+      case "follow":
+        return [
+          /* follow user list */
+        ];
+    }
+  },
+};
+```
+
+### Inject spy methods in test
+
+```tsx
+test("user show page", () => {
+  const requestUrlSpy = jest.fn();
+  const handler = createRestHandler({
+    path: "/users/:id",
+    resolver: () => ({ id: 1, name: "user1", age: 10 }),
+    // You can specify onRequest hook. It is fired before mock handler return a response.
+    // vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
+    onRequest: (req) => {
+      requestUrlSpy(req.url.toString());
+    },
+    // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  });
+  server.use(handler);
+
+  render(<UserShow />);
+
+  expect(requestUrlSpy).toHaveBeenCalledWith("/users/1");
+});
+```
 
 TODO
