@@ -2,7 +2,7 @@
 
 > Reusable msw mock definition.
 
-[![codecov](https://codecov.io/gh/KoichiKiyokawa/type-safe-path/branch/main/graph/badge.svg?token=61F6FRPXKN)](https://codecov.io/gh/KoichiKiyokawa/type-safe-path)
+[![codecov](https://codecov.io/gh/KoichiKiyokawa/msw-object/branch/main/graph/badge.svg?token=NY24WQJELL)](https://codecov.io/gh/KoichiKiyokawa/msw-object)
 
 ## Usage
 
