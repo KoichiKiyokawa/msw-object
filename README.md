@@ -31,7 +31,7 @@ import { setupServer } from "msw";
 const baseBuilder = defineBaseRestBuilder({
   basePath: "http://localhost:3000",
   // Set default delay as 500ms
-  // It cannot be done with original msw!!
+  // It is difficult with original msw!!
   delay: 500,
 });
 
