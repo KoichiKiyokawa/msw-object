@@ -6,7 +6,6 @@ import {
   DefaultBodyType,
   RestContext,
 } from "msw";
-import { joinURL } from "ufo";
 
 type MaybePromise<T> = Promise<T> | T;
 
@@ -55,5 +54,10 @@ export function createRestHandler<ResponseData, RequestBody extends DefaultBodyT
     );
   };
 
-  return rest[builder.method](joinURL(builder.basePath, builder.path), responseResolver);
+  return rest[builder.method](joinPath(builder.basePath, builder.path), responseResolver);
+}
+
+function joinPath(basePath: string, path: string): string {
+  if (basePath.endsWith("/")) basePath = basePath.slice(0, -1);
+  return `${basePath}${path.startsWith("/") ? "" : "/"}${path}`;
 }
