@@ -29,7 +29,12 @@
     "test:typecheck": "vitest typecheck",
     "test:coverage": "vitest --run --coverage",
     "prepublishOnly": "pnpm build",
-    "release": "pnpm test --run && semantic-release"
+    "release": "pnpm run test --run && semantic-release"
+  },
+  "release": {
+    "branches": [
+      "main"
+    ]
   },
   "lint-staged": {
     "*.{ts}": [
