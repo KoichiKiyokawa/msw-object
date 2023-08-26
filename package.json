@@ -48,7 +48,7 @@
     "msw": "1.1.0",
     "rome": "11.0.0",
     "typescript": "4.9.5",
-    "unbuild": "1.1.2",
+    "unbuild": "2.0.0",
     "vitest": "0.29.1"
   },
   "packageManager": "pnpm@7.28.0",
