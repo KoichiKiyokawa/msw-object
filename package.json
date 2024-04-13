@@ -51,7 +51,7 @@
     "unbuild": "1.1.2",
     "vitest": "0.29.1"
   },
-  "packageManager": "pnpm@7.28.0",
+  "packageManager": "pnpm@8.15.7",
   "prettier": {
     "printWidth": 60
   }
