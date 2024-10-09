@@ -12,7 +12,7 @@ specifiers:
   lint-staged: 13.1.2
   msw: 1.1.0
   rome: 11.0.0
-  typescript: 4.9.5
+  typescript: 5.6.3
   unbuild: 1.1.2
   vitest: 0.29.1
 
@@ -26,9 +26,9 @@ devDependencies:
   husky: 8.0.3
   jsdom: 21.1.0
   lint-staged: 13.1.2
-  msw: 1.1.0_typescript@4.9.5
+  msw: 1.1.0_typescript@5.6.3
   rome: 11.0.0
-  typescript: 4.9.5
+  typescript: 5.6.3
   unbuild: 1.1.2
   vitest: 0.29.1_jsdom@21.1.0
 
@@ -2625,7 +2625,7 @@ packages:
     resolution: {integrity: sha512-sGkPx+VjMtmA6MX27oA4FBFELFCZZ4S4XqeGOXCv68tT+jb3vk/RyaKWP0PTKyWtmLSM0b+adUTEvbs1PEaH2w==}
     dev: true
 
-  /msw/1.1.0_typescript@4.9.5:
+  /msw/1.1.0_typescript@5.6.3:
     resolution: {integrity: sha512-oqMvUXm1bMbwvGpoXAQVz8vXXQyQyx52HBDg3EDOK+dFXkQHssgkXEG4LfMwwZyr2Qt18I/w04XPaY4BkFTkzA==}
     engines: {node: '>=14'}
     hasBin: true
@@ -2654,7 +2654,7 @@ packages:
       path-to-regexp: 6.2.1
       strict-event-emitter: 0.4.4
       type-fest: 2.19.0
-      typescript: 4.9.5
+      typescript: 5.6.3
       yargs: 17.6.2
     transitivePeerDependencies:
       - encoding
@@ -3408,6 +3408,12 @@ packages:
   /typescript/4.9.5:
     resolution: {integrity: sha512-1FXk9E2Hm+QzZQ7z+McJiHL4NW1F2EzMu9Nq9i3zAaGqibafqYwCVU6WyWAuyQRRzOlxou8xZSyXLEN8oKj24g==}
     engines: {node: '>=4.2.0'}
+    hasBin: true
+    dev: true
+
+  /typescript/5.6.3:
+    resolution: {integrity: sha512-hjcS1mhfuyi4WW8IWtjP7brDrG2cuDZukyrYrSauoXGNgx0S7zceP07adYkJycEr56BOUTNPzbInooiN3fn1qw==}
+    engines: {node: '>=14.17'}
     hasBin: true
     dev: true
 
